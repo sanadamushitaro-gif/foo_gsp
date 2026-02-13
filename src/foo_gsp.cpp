@@ -1,4 +1,4 @@
-// foo_test.cpp : Defines the exported functions for the DLL application.
+// foo_gsp.cpp : Defines the exported functions for the DLL application.
 //
 
 #include "stdafx.h"

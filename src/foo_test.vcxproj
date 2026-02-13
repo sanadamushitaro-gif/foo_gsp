@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B027E808-B69B-48C1-9F5B-327D5ED04B81}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>foo_test</RootNamespace>
+    <RootNamespace>foo_gsp</RootNamespace>
     <ProjectName>foo_gsp</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
