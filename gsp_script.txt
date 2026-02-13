@@ -10,9 +10,9 @@ function doPost(e) {
     const sheetName = "playlist";
     const sheet = ss.getSheetByName(sheetName) || ss.insertSheet(sheetName);
 
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(["Title", "Artist", "Album", "PlayCount"]);
-    }
+    // 毎回上書き: 既存内容を全て消してから再作成
+    sheet.clearContents();
+    sheet.getRange(1, 1, 1, 4).setValues([["Title", "Artist", "Album", "PlayCount"]]);
 
     const tracks = Array.isArray(data.tracks) ? data.tracks : [];
 
@@ -24,7 +24,7 @@ function doPost(e) {
     ]));
 
     if (rows.length > 0) {
-      sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, 4).setValues(rows);
+      sheet.getRange(2, 1, rows.length, 4).setValues(rows);
     }
 
     return ContentService.createTextOutput("ok tracks=" + tracks.length);
