@@ -1,0 +1,35 @@
+function doPost(e) {
+  try {
+    if (!e || !e.postData) {
+      return ContentService.createTextOutput("ERROR: no postData");
+    }
+
+    const data = JSON.parse(e.postData.contents);
+
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheetName = "playlist";
+    const sheet = ss.getSheetByName(sheetName) || ss.insertSheet(sheetName);
+
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Title", "Artist", "Album", "PlayCount"]);
+    }
+
+    const tracks = Array.isArray(data.tracks) ? data.tracks : [];
+
+    const rows = tracks.map(t => ([
+      t.title || "",
+      t.artist || "",
+      t.album || "",
+      t.play_count || ""
+    ]));
+
+    if (rows.length > 0) {
+      sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, 4).setValues(rows);
+    }
+
+    return ContentService.createTextOutput("ok tracks=" + tracks.length);
+
+  } catch (err) {
+    return ContentService.createTextOutput("ERROR: " + err);
+  }
+}
